@@ -18,7 +18,7 @@ const listCategoryPropertiesController = async (request: Request, response: Resp
 
 const retrieveCategoriesController = async (request: Request, response: Response) => {
   const categories = await retrieveCategoriesService();
-  return response.json(categories);
+  return response.json(instanceToPlain(categories));
 }
 
 export { createCategoryController, listCategoryPropertiesController, retrieveCategoriesController };

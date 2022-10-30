@@ -3,34 +3,21 @@ import { Property } from "../../entities/property.entity";
 import { Schedule } from "../../entities/schedules_users_properties.entity";
 import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/appError";
+import { IScheduleRequest } from "../../interfaces/schedules";
 
-const createScheduleService = async (id: string, {date, hour, property}: Schedule): Promise<string> => {
+const createScheduleService = async (id: string, {date, hour, propertyId}: IScheduleRequest): Promise<string> => {
   const scheduleRepository = AppDataSource.getRepository(Schedule);
   const userRepository = AppDataSource.getRepository(User);
   const propertyRepository = AppDataSource.getRepository(Property);
 
   const desiredProperty = await propertyRepository.findOneBy({
-    id: property.id
+    id: propertyId
   })
 
   const potentialClient = await userRepository.findOneBy({
     id: id
   })
 
-  const alreadyScheduled = await scheduleRepository.find({
-    where: {
-      property: {
-        id: property.id
-      },
-    },
-    relations: {
-      user: true,
-    }
-  });
-
-  if (alreadyScheduled !== null){
-    throw new AppError(400, "Schedule already exists");
-  }
   if (desiredProperty === null){
     throw new AppError(404,"Property not found");
   }

@@ -17,15 +17,15 @@ const listSchedulesService = async( id: string)  => {
   const schedules = await scheduleRepository.find({
     where: {
       property: {
-        id,
+        id
       },
     },
     relations: {
-      user: true,
-    },
+      user: true
+    }
   });
-
-  return schedules;
+  const listSchedules = {listSchedules: schedules}
+  return listSchedules;
 }
 
 export default listSchedulesService;

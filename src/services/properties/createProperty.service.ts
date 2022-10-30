@@ -3,29 +3,28 @@ import { Address } from "../../entities/address.entity";
 import { Category } from "../../entities/categories.entity";
 import { Property } from "../../entities/property.entity";
 import { AppError } from "../../errors/appError";
+import { IPropertyRequest } from "../../interfaces/properties";
 
-const createPropertyService = async ({ value, size, address, category }:Property): Promise<Property> => {
+const createPropertyService = async ({ value, size, address, categoryId }:IPropertyRequest): Promise<Property> => {
   const addressRepository = AppDataSource.getRepository(Address);
   const propertyRepository = AppDataSource.getRepository(Property);
   const categoryRepository = AppDataSource.getRepository(Category);
 
-  const { id } = address;
-  const existingProperty = addressRepository.findOneBy({
-    id: id
-  });
+  const existingProperty = await propertyRepository.findOneBy({
+    size: size,
+    value: value,
+    address: address
+  })
 
-  if (existingProperty!== null){
-    throw new AppError(400, "Property already exists")
+  if (existingProperty === null) {
+    throw new AppError(404, "Property does not exist");
   }
-
-  const categoryId = category.id;
-
   const existingCategory = await categoryRepository.findOneBy({
     id: categoryId
   })
 
   if (existingCategory === null){
-    throw new AppError(404, "Category not exists");
+    throw new AppError(404, "Category does not exist");
   }
 
   if(address.state.length > 2){

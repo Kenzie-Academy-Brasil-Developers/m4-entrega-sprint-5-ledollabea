@@ -4,7 +4,7 @@ import request from "supertest"
 import app from "../../../app";
 import {mockedUser, mockedAdmin, mockedAdminLogin, mockedCategory, mockedProperty, mockedUserLogin, mockedSchedule, mockedScheduleInvalidPropertyId, mockedScheduleInvalidDate, mockedScheduleInvalidHourLess8, mockedScheduleInvalidHourMore18} from "../../mocks"
 
-
+jest.setTimeout(10000);
 describe("/schedules", () => {
     let connection: DataSource
 
