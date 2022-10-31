@@ -9,7 +9,7 @@ const updateUserService = async (id: string, user: IUserDecoded, update: IUserUp
   const findUser = await userRepository.findOneBy({
     id: id
   })
-  if (findUser !== null){
+  if (findUser === null){
     throw new AppError(404,"User not found!")
   }
   if (user.isAdm===false){
