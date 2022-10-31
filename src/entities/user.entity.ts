@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import { Schedule } from "./schedules_users_properties.entity";
 
@@ -13,6 +14,7 @@ class User {
   email: string;
 
   @Column({length: 128})
+  @Exclude()
   password: string;
 
   @Column()

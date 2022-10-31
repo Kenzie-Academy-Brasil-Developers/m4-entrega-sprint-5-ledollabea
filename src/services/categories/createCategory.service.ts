@@ -10,15 +10,15 @@ const createCategoryService = async ({
   const existingCategory = await categoryRepository.findOneBy({
     name: name,
   });
-  if (existingCategory === null) {
-    const newCategory = categoryRepository.create({
-      name,
-    });
-    await categoryRepository.save(newCategory);
-  
-    return newCategory;
+  if (existingCategory) {
+    throw new AppError("Category already exists", 400);
   }
-  throw new AppError("Category already exists", 409);
+  const newCategory = categoryRepository.create({
+    name,
+  });
+  await categoryRepository.save(newCategory);
+
+  return newCategory;
 };
 
 export default createCategoryService;

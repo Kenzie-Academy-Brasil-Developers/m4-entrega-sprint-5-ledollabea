@@ -17,7 +17,7 @@ const createPropertyService = async ({ value, size, address, categoryId }:IPrope
   })
 
   if (existingProperty !== null) {
-    throw new AppError("Property already exists.",404);
+    throw new AppError("Property already exists.",400);
   }
   
   const existingCategory = await categoryRepository.findOneBy({

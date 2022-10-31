@@ -11,7 +11,7 @@ const createPropertyController = async (request: Request, response: Response) =>
 
 const listPropertiesController = async (request: Request, response: Response) => {
   const listedProperties = await listPropertiesService();
-  return response.json(instanceToPlain(listedProperties));
+  return response.json(instanceToPlain(listedProperties)).send();
 }
 
 export {createPropertyController, listPropertiesController};

@@ -5,7 +5,7 @@ import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/appError";
 import { IScheduleRequest } from "../../interfaces/schedules";
 
-const createScheduleService = async (id: string, {date, hour, propertyId}: IScheduleRequest): Promise<string> => {
+const createScheduleService = async (id: string, {date, hour, propertyId}: IScheduleRequest): Promise<Schedule> => {
   const scheduleRepository = AppDataSource.getRepository(Schedule);
   const userRepository = AppDataSource.getRepository(User);
   const propertyRepository = AppDataSource.getRepository(Property);
@@ -58,9 +58,9 @@ const createScheduleService = async (id: string, {date, hour, propertyId}: ISche
     user: potentialClient
   }
 
-  const saveSchedule = await scheduleRepository.create(newSchedule);
+  const saveSchedule = scheduleRepository.create(newSchedule);
   await scheduleRepository.save(newSchedule);
-  return "Schedule created successfully";
+  return saveSchedule;
 }
 
 export default createScheduleService;

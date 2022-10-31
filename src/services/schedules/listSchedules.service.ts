@@ -24,8 +24,8 @@ const listSchedulesService = async( id: string)  => {
       user: true
     }
   });
-  const socorro = {schedules: listschedules}
-  return socorro;
+  const newSchedules = {schedules: listschedules}
+  return newSchedules;
 }
 
 export default listSchedulesService;

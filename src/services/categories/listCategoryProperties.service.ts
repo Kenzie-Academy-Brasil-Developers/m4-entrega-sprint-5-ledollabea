@@ -1,6 +1,5 @@
 import AppDataSource from "../../data-source";
 import { Category } from "../../entities/categories.entity";
-import { Property } from "../../entities/property.entity";
 import { AppError } from "../../errors/appError";
 
 const listCategoryPropertiesService = async (id: string) => {

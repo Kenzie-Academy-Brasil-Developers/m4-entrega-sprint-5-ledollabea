@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import "express-async-errors";
 import express from "express";
 import userRoutes from "./routes/users.routes";
 import sessionRoutes from "./routes/sessions.routes";
