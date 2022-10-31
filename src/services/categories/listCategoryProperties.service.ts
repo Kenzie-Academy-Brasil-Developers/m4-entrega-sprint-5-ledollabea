@@ -6,9 +6,12 @@ import { AppError } from "../../errors/appError";
 const listCategoryPropertiesService = async (id: string) => {
   const categoryRepository = AppDataSource.getRepository(Category);
   
-  const foundCategory = await categoryRepository.findBy({id});
+  const foundCategory = await categoryRepository.findBy({
+    id: id
+  });
+
   if (foundCategory===null){
-    throw new AppError(409, "Category not exists");
+    throw new AppError( "Category not exists", 409);
   }
   const propertiesPerCategory = await categoryRepository.findOne({
     where: {
@@ -19,7 +22,7 @@ const listCategoryPropertiesService = async (id: string) => {
     }
   })
   if (propertiesPerCategory === null){
-    throw new AppError(404, "No property found");
+    throw new AppError("No property found",404);
   }
   return propertiesPerCategory;
 }

@@ -27,7 +27,7 @@ class User {
   @UpdateDateColumn()
   updatedAt: Date
 
-  @OneToMany(() => Schedule, schedule => schedule.user) schedules: Schedule[]
+  @OneToMany(() => Schedule, schedule => schedule.user) schedules: Schedule
 }
 
 export { User };

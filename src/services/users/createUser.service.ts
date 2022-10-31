@@ -6,14 +6,14 @@ import { AppError } from "../../errors/appError";
 
 const createUserService = async ({name, email, isAdm, password}: IUserRequest): Promise<IUser> => {
     const userRepository = AppDataSource.getRepository(User);
-    if (!password){
-        throw new AppError(400,"Password is needed");
+    if (password===undefined){
+        throw new AppError("Password is needed",400);
     }
     const existingUser = await userRepository.findOneBy({
         email: email
     });
     if (existingUser !== null){
-        throw new AppError(400,"Email already exists");
+        throw new AppError("Email already exists",400);
     }
     const passHashed = await hash(password, 10);
     const user = {

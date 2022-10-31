@@ -16,22 +16,23 @@ const createPropertyService = async ({ value, size, address, categoryId }:IPrope
     address: address
   })
 
-  if (existingProperty === null) {
-    throw new AppError(404, "Property does not exist");
+  if (existingProperty !== null) {
+    throw new AppError("Property already exists.",404);
   }
+  
   const existingCategory = await categoryRepository.findOneBy({
     id: categoryId
   })
 
   if (existingCategory === null){
-    throw new AppError(404, "Category does not exist");
+    throw new AppError("Category does not exist",404);
   }
 
   if(address.state.length > 2){
-    throw new AppError(400, "State must come in UF format");
+    throw new AppError("State must come in UF format",400);
   }
   if(address.zipCode.length > 8){
-    throw new AppError(400, "ZipCode must come with 8 digits, only numbers");
+    throw new AppError("ZipCode must come with 8 digits, only numbers",400);
   }
 
   const createAddress = {

@@ -11,10 +11,10 @@ const listSchedulesService = async( id: string)  => {
     id,
   });
   if (foundProperty === null){
-    throw new AppError(404,"Property not exists");
+    throw new AppError("Property not exists",404,);
   }
 
-  const schedules = await scheduleRepository.find({
+  const listschedules = await scheduleRepository.find({
     where: {
       property: {
         id
@@ -24,8 +24,8 @@ const listSchedulesService = async( id: string)  => {
       user: true
     }
   });
-  const listSchedules = {listSchedules: schedules}
-  return listSchedules;
+  const socorro = {schedules: listschedules}
+  return socorro;
 }
 
 export default listSchedulesService;

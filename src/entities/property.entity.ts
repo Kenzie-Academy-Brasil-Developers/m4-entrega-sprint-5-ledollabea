@@ -39,7 +39,7 @@ class Property {
   @JoinColumn()
   address: Address;
 
-  @OneToMany(() => Schedule, schedule => schedule.property) schedule: Schedule;
+  @OneToMany(() => Schedule, schedule => schedule.property) schedule: Schedule[];
   
   @ManyToOne(() => Category) category: Category;
 

@@ -10,20 +10,20 @@ const updateUserService = async (id: string, user: IUserDecoded, update: IUserUp
     id: id
   })
   if (findUser === null){
-    throw new AppError(404,"User not found!")
+    throw new AppError("User not found!",404)
   }
   if (user.isAdm===false){
-      throw new AppError(401,"Unauthorized User");
+      throw new AppError("Unauthorized User",401);
   } 
   
   if(update.id !== undefined){
-    throw new AppError(401,"Cannot Change property id");
+    throw new AppError("Cannot Change property id",401);
   }
   if(update.isActive !== undefined){
-    throw new AppError(401,"Cannot Change property isActive");
+    throw new AppError("Cannot Change property isActive",401);
   }
   if(update.isAdm !== undefined){
-    throw new AppError(401,"Cannot Change property isAdm");
+    throw new AppError("Cannot Change property isAdm",401);
   }
 
   const {name, email, password} = update;
